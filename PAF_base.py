@@ -5,9 +5,25 @@ Created on Fri Mar 19 13:22:29 2021
 @author: shane
 """
 
+from admin import read_json, select_thing
+from pdfops import write_fillable_pdf
+
+fields=['Departments', 'Program', #cjr
+ 'First Name', 'Last Name', 'Initial_4', 'EmplID', 'No', 'Street', 'Apt', #cjr
+ 'City', 'State', 'Zip Code', 'Phone Number', #cjr
+ 'TitleRank', 'Functional Title', #cjr but can be updated
+ 'CUNYfirst Position', 'Line', #cjr but can be updated... based on pos num file?
+ 'Action', 'Reason',    #from user input + hr guide file
+ 'Effective Date', 'Or Effective Period Starting', 'and Ending', #from user input
+ 'Salary amount', 'Salary', 'Per Annum', 'Fraction of Annual Rate', #from user input
+ 'Remarks'] #from user input + HR Guide actions
 #Phase 1 - determine what type of operation 
 #single, multi-person, multi-action, or multi-person,multi-action (pattern)
-
+options=['Single - One PAF describing one action for one employee',
+         'Multi-Action - PAFs describing multiple actions for one employee',
+         'Multi-person - PAFs describing one action for multiple employees',
+         'Pattern - PAFS describing the same set of actions for multiple employees']
+selection=select_thing(options).split(' - ')[0]
 #Phase 2 - identify person or persons based on several criteria
 #fuzzy name lookup, emplid, category of staff, department, etc
 
