@@ -19,14 +19,33 @@ fields=['Departments', 'Program', #cjr
  'Remarks'] #from user input + HR Guide actions
 #Phase 1 - determine what type of operation 
 #single, multi-person, multi-action, or multi-person,multi-action (pattern)
-options=['Single - One PAF describing one action for one employee',
+template=r'Y:\Templates\Autotemplates\Personnel Action Form.pdf'
+def phase1():
+    options=['Single - One PAF describing one action for one employee',
          'Multi-Action - PAFs describing multiple actions for one employee',
          'Multi-person - PAFs describing one action for multiple employees',
          'Pattern - PAFS describing the same set of actions for multiple employees']
-selection=select_thing(options).split(' - ')[0]
+    selections={l:x for l,x in zip([i.split(' - ')[0] for i in options],['00','10','01','11'])}
+    
+    selection=select_thing(options).split(' - ')[0]
+    return(selections[selection])
 #Phase 2 - identify person or persons based on several criteria
 #fuzzy name lookup, emplid, category of staff, department, etc
-
+def matching_criteria(criteria):
+    if criteria in critdict:#some dictionary of all possible items and their classes
+        category=critdict[criteria]
+        
+def select_person():
+    #this is where we look for at least one person
+    #perhaps using some sort of lookup?
+    #idk figure it out, shane
+    options=['Name','Emplid','Title Group','Department'] #need data source here
+    selection=select_thing(options)
+    
+    return(persondict)
+def phase2(inst_str:str):   #accepts instruction string from phase1
+    
+    
 #Phase 3 - population of additional data
 #Effective dates (mandatory, even in declaring lack of knowledge)
 #Comments (optional)
